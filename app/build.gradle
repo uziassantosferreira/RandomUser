@@ -23,6 +23,7 @@ ext {
     rxandroid_version = '2.0.1'
     rxkotlin_version = '2.1.0'
     logging_interceptor_version = '3.8.0'
+    mockito_kotlin_version = '1.5.0'
 }
 
 android {
@@ -69,6 +70,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
     testImplementation "junit:junit:$test_junit_version"
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin_version"
     kaptAndroidTest "com.android.support.test:runner:$test_runner_version"
     kaptAndroidTest "com.android.support.test.espresso:espresso-core:$test_espresso_core_version"
 }
