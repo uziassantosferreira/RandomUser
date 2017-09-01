@@ -24,6 +24,7 @@ ext {
     rxkotlin_version = '2.1.0'
     logging_interceptor_version = '3.8.0'
     mockito_kotlin_version = '1.5.0'
+    arch_lifecycle_version = '1.0.0-alpha9'
 }
 
 android {
@@ -55,7 +56,7 @@ kapt {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation"org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
     implementation "com.google.dagger:dagger:$dagger_version"
@@ -69,6 +70,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+    implementation "android.arch.lifecycle:runtime:$arch_lifecycle_version"
+    implementation "android.arch.lifecycle:extensions:$arch_lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$arch_lifecycle_version"
     testImplementation "junit:junit:$test_junit_version"
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin_version"
     kaptAndroidTest "com.android.support.test:runner:$test_runner_version"

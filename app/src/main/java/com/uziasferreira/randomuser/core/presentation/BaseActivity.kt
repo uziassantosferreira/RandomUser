@@ -7,8 +7,12 @@ import android.view.MenuItem
 abstract class BaseActivity : AppCompatActivity(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         injectDependencies()
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
         bindPresenter()
     }
 
