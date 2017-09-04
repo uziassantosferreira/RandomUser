@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-object LifecycleStrategistModule {
+class LifecycleStrategistModule {
 
     @Provides
     fun strategist(owner: LifecycleOwner): LifecycleStrategist {

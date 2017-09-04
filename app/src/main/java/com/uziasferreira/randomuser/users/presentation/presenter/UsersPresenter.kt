@@ -15,9 +15,10 @@ class UsersPresenterImpl(private val getUsers: GetUsers,
                          private val coordinator: BehavioursCoordinator<List<User>>,
                          private val strategist: LifecycleStrategist): UsersPresenter {
     override fun getUsers() {
-        strategist.applyStrategy(getUsers.run()
+        val disposableGetUsers = getUsers.run()
                 .compose(coordinator)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({}, {}, {}))
+                .subscribe({}, {}, {})
+        strategist.applyStrategy(disposableGetUsers)
     }
 }
