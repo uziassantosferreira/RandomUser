@@ -8,6 +8,7 @@ import com.uziasferreira.randomuser.core.presentation.EmptyStateView
 import com.uziasferreira.randomuser.helper.MockitoHelpers
 import io.reactivex.Flowable
 import io.reactivex.functions.Action
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
@@ -51,7 +52,11 @@ class AssignEmptyCoordinationTest {
     fun should_hide_and_never_show_empty_state_when_emit_not_target_error() {
         Flowable.error<Int>(RuntimeException("Error not target"))
                 .compose(assignEmptyness)
-                .subscribe({}, {}, {})
+                .subscribeBy(
+                        onError = {},
+                        onNext = {},
+                        onComplete = {}
+                )
 
         verify(hideEmtpyState, MockitoHelpers.oneTimeOnly()).run()
         verify(showEmtpyState, never()).run()

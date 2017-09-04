@@ -5,6 +5,7 @@ import com.uziasferreira.randomuser.core.presentation.LoadingView
 import com.uziasferreira.randomuser.helper.MockitoHelpers
 import io.reactivex.Flowable
 import io.reactivex.functions.Action
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
@@ -53,7 +54,13 @@ class LoadingCoordinationTest {
     @Test
     fun should_show_and_hide_when_emit_error() {
         val empty = Flowable.error<String>(RuntimeException())
-        empty.compose<Any>(loadingCoordination).subscribe({}, {})
+        empty.compose<Any>(loadingCoordination)
+                .subscribeBy(
+                        onError = {},
+                        onNext = {},
+                        onComplete = {}
+                )
+
 
         checkLoadingCoordinated()
     }

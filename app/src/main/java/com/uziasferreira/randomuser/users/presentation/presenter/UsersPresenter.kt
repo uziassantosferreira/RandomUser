@@ -6,6 +6,7 @@ import com.uziasferreira.randomuser.core.presentation.lifecycles.LifecycleStrate
 import com.uziasferreira.randomuser.users.domain.model.User
 import com.uziasferreira.randomuser.users.domain.usecase.GetUsers
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 
 interface UsersPresenter: BasePresenter {
     fun getUsers()
@@ -18,7 +19,11 @@ class UsersPresenterImpl(private val getUsers: GetUsers,
         val disposableGetUsers = getUsers.run()
                 .compose(coordinator)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({}, {}, {})
+                .subscribeBy(
+                        onError = {},
+                        onNext = {},
+                        onComplete = {}
+                )
         strategist.applyStrategy(disposableGetUsers)
     }
 }
