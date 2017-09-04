@@ -4,6 +4,7 @@ import android.arch.lifecycle.LifecycleOwner
 import com.uziasferreira.randomuser.core.behaviours.BehavioursCoordinator
 import com.uziasferreira.randomuser.core.behaviours.di.BehavioursModule
 import com.uziasferreira.randomuser.core.presentation.EmptyStateView
+import com.uziasferreira.randomuser.core.presentation.LoadingView
 import com.uziasferreira.randomuser.core.presentation.lifecycles.LifecycleStrategist
 import com.uziasferreira.randomuser.core.presentation.lifecycles.di.LifecycleStrategistModule
 import com.uziasferreira.randomuser.users.data.repository.UsersRepositoryImpl
@@ -30,6 +31,10 @@ class UsersModule {
             : UsersRepository = UsersRepositoryImpl()
 
     @Provides fun emptyStateView(activity: UsersActivity): EmptyStateView {
+        return activity
+    }
+
+    @Provides fun loadingView(activity: UsersActivity): LoadingView {
         return activity
     }
 

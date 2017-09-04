@@ -2,7 +2,7 @@ package com.uziasferreira.randomuser.core.presentation
 
 import io.reactivex.functions.Action
 
-interface BaseView {
+interface BaseView : EmptyStateView, ErrorStateView, LoadingView, ToogleRefreshView {
     fun getPresenter(): BasePresenter
     fun injectDependencies()
 }

@@ -12,9 +12,9 @@ import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
 
-class AssignEmptyStateTest{
+class AssignEmptyCoordinationTest {
     private val uiScheduler = Schedulers.trampoline()
-    private lateinit var assignEmptyness: AssignEmptyState<Int>
+    private lateinit var assignEmptyness: AssignEmptyCoordination<Int>
     private val showEmtpyState: Action = mock()
     private val hideEmtpyState: Action = mock()
 
@@ -24,7 +24,7 @@ class AssignEmptyStateTest{
             override fun showEmptyState(): Action = showEmtpyState
             override fun hideEmptyState(): Action = hideEmtpyState
         }
-        assignEmptyness = AssignEmptyState(view, uiScheduler)
+        assignEmptyness = AssignEmptyCoordination(view, uiScheduler)
     }
 
     @Test

@@ -9,7 +9,7 @@ import io.reactivex.FlowableTransformer
 import io.reactivex.Scheduler
 import org.reactivestreams.Publisher
 
-class AssignEmptyState<T>(private val view: EmptyStateView, private val uiScheduler: Scheduler):
+class AssignEmptyCoordination<T>(private val view: EmptyStateView, private val uiScheduler: Scheduler):
         FlowableTransformer<T, T> {
 
     override fun apply(upstream: Flowable<T>): Publisher<T> {
