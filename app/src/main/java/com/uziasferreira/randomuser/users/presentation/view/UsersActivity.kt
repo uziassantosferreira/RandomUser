@@ -31,31 +31,4 @@ class UsersActivity : BaseActivity(), EmptyStateView {
     override fun injectDependencies() {
         AndroidInjection.inject(this)
     }
-
-    override fun hideEmptyState(): Action {
-        return Action {
-            Toast.makeText(this, "hide", Toast.LENGTH_LONG).show() }
-    }
-
-    override fun showEmptyState(): Action {
-        return Action {
-            Toast.makeText(this, "show", Toast.LENGTH_LONG).show() }
-    }
-
-    override fun showErrorState(): Action {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun hideErrorState(): Action {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun disableRefresh(): Action {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun enableRefresh(): Action {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }

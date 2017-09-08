@@ -5,10 +5,10 @@ import com.uziasferreira.randomuser.core.behaviours.BehavioursCoordinator
 import com.uziasferreira.randomuser.core.behaviours.di.BehavioursModule
 import com.uziasferreira.randomuser.core.presentation.EmptyStateView
 import com.uziasferreira.randomuser.core.presentation.LoadingView
+import com.uziasferreira.randomuser.core.presentation.PlaceholderViewsManager
 import com.uziasferreira.randomuser.core.presentation.lifecycles.LifecycleStrategist
 import com.uziasferreira.randomuser.core.presentation.lifecycles.di.LifecycleStrategistModule
 import com.uziasferreira.randomuser.users.data.repository.UsersRepositoryImpl
-import com.uziasferreira.randomuser.users.domain.model.User
 import com.uziasferreira.randomuser.users.domain.repository.UsersRepository
 import com.uziasferreira.randomuser.users.domain.usecase.GetUsers
 import com.uziasferreira.randomuser.users.domain.usecase.GetUsersImpl
@@ -17,6 +17,9 @@ import com.uziasferreira.randomuser.users.presentation.presenter.UsersPresenterI
 import com.uziasferreira.randomuser.users.presentation.view.UsersActivity
 import dagger.Module
 import dagger.Provides
+import kotlinx.android.synthetic.main.state_view_empty.*
+import kotlinx.android.synthetic.main.state_view_error.*
+import kotlinx.android.synthetic.main.state_view_loading.*
 
 @Module(includes = arrayOf(BehavioursModule::class, LifecycleStrategistModule::class))
 class UsersModule {
@@ -40,5 +43,10 @@ class UsersModule {
 
     @Provides fun strategist(activity: UsersActivity): LifecycleOwner {
         return activity
+    }
+
+    @Provides fun placeHolder(activity: UsersActivity): PlaceholderViewsManager {
+        return PlaceholderViewsManager(loadingViewStub = activity.state_view_loading,
+                errorViewStub = activity.state_view_error, emptyViewStub = activity.state_view_empty)
     }
 }
