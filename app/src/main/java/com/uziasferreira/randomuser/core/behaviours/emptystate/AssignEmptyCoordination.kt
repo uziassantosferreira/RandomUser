@@ -9,11 +9,11 @@ import io.reactivex.FlowableTransformer
 import io.reactivex.Scheduler
 import org.reactivestreams.Publisher
 
-class AssignEmptyCoordination<T>(private val view: EmptyStateView, private val uiScheduler: Scheduler):
-        FlowableTransformer<T, T> {
+open class AssignEmptyCoordination<Any>(private val view: EmptyStateView, private val uiScheduler: Scheduler):
+        FlowableTransformer<Any, Any> {
 
-    override fun apply(upstream: Flowable<T>): Publisher<T> {
-        val delegate = HideAtStartShowAtError<T>(
+    override fun apply(upstream: Flowable<Any>): Publisher<Any> {
+        val delegate = HideAtStartShowAtError<Any>(
                 whenStart = view.hideEmptyState(),
                 atError = view.showEmptyState(),
                 errorPredicate = object : ErrorPredicate {

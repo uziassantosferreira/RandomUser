@@ -2,4 +2,4 @@ package com.uziasferreira.randomuser.users.data.repository.datasource.networking
 
 import com.google.gson.annotations.SerializedName
 
-data class JsonUserBody(@SerializedName("results") var users: JsonUser)
+data class JsonUserBody(@SerializedName("results") var users: List<JsonUser>)

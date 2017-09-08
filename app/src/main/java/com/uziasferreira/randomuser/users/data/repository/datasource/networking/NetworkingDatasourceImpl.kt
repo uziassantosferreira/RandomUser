@@ -4,9 +4,7 @@ import com.uziasferreira.randomuser.users.data.repository.datasource.NetworkingD
 import com.uziasferreira.randomuser.users.domain.model.User
 import io.reactivex.Flowable
 
-class NetworkingDatasourceImpl: NetworkingDatasource {
+class NetworkingDatasourceImpl(private val usersApi: UsersApi): NetworkingDatasource {
 
-    override fun getUsers(): Flowable<List<User>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getUsers(): Flowable<List<User>> = Flowable.just(listOf())
 }

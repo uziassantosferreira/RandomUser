@@ -7,12 +7,12 @@ import io.reactivex.Scheduler
 import io.reactivex.functions.Action
 import org.reactivestreams.Publisher
 
-class ShowAtStartHideWhenDone<T>(private val whenStart: Action,
+class ShowAtStartHideWhenDone<Any>(private val whenStart: Action,
                                  private val whenDone: Action,
                                  private val targetScheduler: Scheduler)
-    : FlowableTransformer<T, T> {
+    : FlowableTransformer<Any, Any> {
 
-    override fun apply(upstream: Flowable<T>): Publisher<T> {
+    override fun apply(upstream: Flowable<Any>): Publisher<Any> {
         return upstream
                 .doOnSubscribe{show()}
                 .doOnTerminate{hide()}

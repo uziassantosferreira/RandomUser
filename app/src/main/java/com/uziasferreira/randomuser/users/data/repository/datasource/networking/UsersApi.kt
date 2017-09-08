@@ -8,4 +8,5 @@ interface UsersApi {
 
     @GET("results=20")
     fun getUsers(): Flowable<List<JsonUser>>
+
 }

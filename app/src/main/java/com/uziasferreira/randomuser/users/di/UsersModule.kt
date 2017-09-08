@@ -21,7 +21,7 @@ import dagger.Provides
 @Module(includes = arrayOf(BehavioursModule::class, LifecycleStrategistModule::class))
 class UsersModule {
 
-    @Provides fun providesUsersPresenter(getUsers: GetUsers, coordinator: BehavioursCoordinator<List<User>>, strategist: LifecycleStrategist)
+    @Provides fun providesUsersPresenter(getUsers: GetUsers, coordinator: BehavioursCoordinator<Any>, strategist: LifecycleStrategist)
             : UsersPresenter = UsersPresenterImpl(getUsers = getUsers, coordinator = coordinator, strategist = strategist)
 
     @Provides fun providesGetUsers(usersRepository: UsersRepository)

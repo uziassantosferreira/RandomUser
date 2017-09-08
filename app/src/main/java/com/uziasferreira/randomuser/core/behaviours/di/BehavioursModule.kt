@@ -6,7 +6,6 @@ import com.uziasferreira.randomuser.core.behaviours.emptystate.AssignEmptyCoordi
 import com.uziasferreira.randomuser.core.behaviours.loadingstate.LoadingCoordination
 import com.uziasferreira.randomuser.core.presentation.EmptyStateView
 import com.uziasferreira.randomuser.core.presentation.LoadingView
-import com.uziasferreira.randomuser.users.domain.model.User
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -15,19 +14,20 @@ import io.reactivex.Scheduler
 class BehavioursModule {
 
     @Provides
-    fun providesBehavioursCoordinator(assignEmptyState: AssignEmptyCoordination<List<User>>,
-                                      loadingCoordination: LoadingCoordination<List<User>>): BehavioursCoordinator<List<User>> {
+    fun providesBehavioursCoordinator(assignEmptyState: AssignEmptyCoordination<Any>,
+                                      loadingCoordination: LoadingCoordination<Any>): BehavioursCoordinator<Any>   {
         return BehavioursCoordinator(assignEmptyState, loadingCoordination)
     }
 
     @Provides
-    fun providesEmptyCoordination(view: EmptyStateView, @UIScheduler scheduler: Scheduler): AssignEmptyCoordination<List<User>> {
+    fun providesEmptyCoordination(view: EmptyStateView, @UIScheduler scheduler: Scheduler): AssignEmptyCoordination<Any> {
         return AssignEmptyCoordination(view, scheduler)
     }
 
     @Provides
-    fun providesLoadingCoordination(view: LoadingView, @UIScheduler scheduler: Scheduler): LoadingCoordination<List<User>> {
+    fun providesLoadingCoordination(view: LoadingView, @UIScheduler scheduler: Scheduler): LoadingCoordination<Any> {
         return LoadingCoordination(view, scheduler)
     }
+
 
 }

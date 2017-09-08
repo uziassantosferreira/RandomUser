@@ -6,11 +6,11 @@ import io.reactivex.Flowable
 import io.reactivex.FlowableTransformer
 import org.reactivestreams.Publisher
 
-class BehavioursCoordinator<T>(private val dealWithEmptyState: AssignEmptyCoordination<T>,
-                               private val loadingCoordination: LoadingCoordination<T>):
-        FlowableTransformer<T, T> {
+class BehavioursCoordinator<Any>(private val dealWithEmptyState: AssignEmptyCoordination<Any>,
+                               private val loadingCoordination: LoadingCoordination<Any>):
+        FlowableTransformer<Any, Any> {
 
-    override fun apply(upstream: Flowable<T>): Publisher<T> {
+    override fun apply(upstream: Flowable<Any>): Publisher<Any> {
         return upstream
                 .compose(dealWithEmptyState)
                 .compose(loadingCoordination)

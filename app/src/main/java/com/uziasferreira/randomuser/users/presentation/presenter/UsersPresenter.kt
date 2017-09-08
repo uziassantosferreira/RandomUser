@@ -13,7 +13,7 @@ interface UsersPresenter: BasePresenter {
 }
 
 class UsersPresenterImpl(private val getUsers: GetUsers,
-                         private val coordinator: BehavioursCoordinator<List<User>>,
+                         private val coordinator: BehavioursCoordinator<Any>,
                          private val strategist: LifecycleStrategist): UsersPresenter {
     override fun getUsers() {
         val disposableGetUsers = getUsers.run()
