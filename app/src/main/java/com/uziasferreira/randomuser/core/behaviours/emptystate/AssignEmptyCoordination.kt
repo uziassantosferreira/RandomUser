@@ -13,6 +13,7 @@ open class AssignEmptyCoordination<Any>(private val view: EmptyStateView, privat
         FlowableTransformer<Any, Any> {
 
     override fun apply(upstream: Flowable<Any>): Publisher<Any> {
+
         val delegate = HideAtStartShowAtError<Any>(
                 whenStart = view.hideEmptyState(),
                 atError = view.showEmptyState(),

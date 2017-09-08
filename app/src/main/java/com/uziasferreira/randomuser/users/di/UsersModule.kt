@@ -12,6 +12,8 @@ import com.uziasferreira.randomuser.users.data.repository.UsersRepositoryImpl
 import com.uziasferreira.randomuser.users.domain.repository.UsersRepository
 import com.uziasferreira.randomuser.users.domain.usecase.GetUsers
 import com.uziasferreira.randomuser.users.domain.usecase.GetUsersImpl
+import com.uziasferreira.randomuser.users.presentation.adapter.UserAdapterImpl
+import com.uziasferreira.randomuser.users.presentation.adapter.UsersAdapter
 import com.uziasferreira.randomuser.users.presentation.presenter.UsersPresenter
 import com.uziasferreira.randomuser.users.presentation.presenter.UsersPresenterImpl
 import com.uziasferreira.randomuser.users.presentation.view.UsersActivity
@@ -24,8 +26,10 @@ import kotlinx.android.synthetic.main.state_view_loading.*
 @Module(includes = arrayOf(BehavioursModule::class, LifecycleStrategistModule::class))
 class UsersModule {
 
-    @Provides fun providesUsersPresenter(getUsers: GetUsers, coordinator: BehavioursCoordinator<Any>, strategist: LifecycleStrategist)
-            : UsersPresenter = UsersPresenterImpl(getUsers = getUsers, coordinator = coordinator, strategist = strategist)
+    @Provides fun providesUsersPresenter(getUsers: GetUsers, coordinator: BehavioursCoordinator<Any>,
+                                         strategist: LifecycleStrategist, usersAdapter: UserAdapterImpl)
+            : UsersPresenter = UsersPresenterImpl(getUsers = getUsers, coordinator = coordinator,
+            strategist = strategist, usersAdapter = usersAdapter)
 
     @Provides fun providesGetUsers(usersRepository: UsersRepository)
             : GetUsers = GetUsersImpl(usersRepository = usersRepository)
@@ -43,6 +47,10 @@ class UsersModule {
 
     @Provides fun strategist(activity: UsersActivity): LifecycleOwner {
         return activity
+    }
+
+    @Provides fun userAdapter(activity: UsersActivity): UserAdapterImpl {
+        return UserAdapterImpl()
     }
 
     @Provides fun placeHolder(activity: UsersActivity): PlaceholderViewsManager {

@@ -29,5 +29,4 @@ class BehavioursModule {
         return LoadingCoordination(view, scheduler)
     }
 
-
 }
