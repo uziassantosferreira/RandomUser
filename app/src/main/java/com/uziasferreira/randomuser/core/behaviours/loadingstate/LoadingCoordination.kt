@@ -7,12 +7,12 @@ import io.reactivex.FlowableTransformer
 import io.reactivex.Scheduler
 import org.reactivestreams.Publisher
 
-class LoadingCoordination<Any>(private val view: LoadingView,
-                             private val uiScheduler: Scheduler) : FlowableTransformer<Any, Any> {
+class LoadingCoordination<T>(private val view: LoadingView,
+                             private val uiScheduler: Scheduler) : FlowableTransformer<T, T> {
 
-    override fun apply(upstream: Flowable<Any>): Publisher<Any> {
+    override fun apply(upstream: Flowable<T>): Publisher<T> {
 
-        val delegate = ShowAtStartHideWhenDone<Any>(
+        val delegate = ShowAtStartHideWhenDone<T>(
                 view.showLoading(),
                 view.hideLoading(),
                 uiScheduler

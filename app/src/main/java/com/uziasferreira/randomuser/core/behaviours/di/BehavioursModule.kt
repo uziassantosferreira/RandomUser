@@ -10,23 +10,23 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
 
-@Module
-class BehavioursModule {
-
-    @Provides
-    fun providesBehavioursCoordinator(assignEmptyState: AssignEmptyCoordination<Any>,
-                                      loadingCoordination: LoadingCoordination<Any>): BehavioursCoordinator<Any>   {
-        return BehavioursCoordinator(assignEmptyState, loadingCoordination)
-    }
-
-    @Provides
-    fun providesEmptyCoordination(view: EmptyStateView, @UIScheduler scheduler: Scheduler): AssignEmptyCoordination<Any> {
-        return AssignEmptyCoordination(view, scheduler)
-    }
-
-    @Provides
-    fun providesLoadingCoordination(view: LoadingView, @UIScheduler scheduler: Scheduler): LoadingCoordination<Any> {
-        return LoadingCoordination(view, scheduler)
-    }
-
-}
+//@Module
+//class BehavioursModule {
+//
+//    @Provides
+//    fun providesBehavioursCoordinator(assignEmptyState: AssignEmptyCoordination<T>,
+//                                      loadingCoordination: LoadingCoordination<T>): BehavioursCoordinator<T> {
+//        return BehavioursCoordinator(assignEmptyState, loadingCoordination)
+//    }
+//
+//    @Provides
+//    fun providesEmptyCoordination(view: EmptyStateView, @UIScheduler scheduler: Scheduler): AssignEmptyCoordination<T> {
+//        return AssignEmptyCoordination(view, scheduler)
+//    }
+//
+//    @Provides
+//    fun providesLoadingCoordination(view: LoadingView, @UIScheduler scheduler: Scheduler): LoadingCoordination {
+//        return LoadingCoordination(view, scheduler)
+//    }
+//
+//}

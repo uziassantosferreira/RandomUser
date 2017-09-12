@@ -8,12 +8,12 @@ import io.reactivex.Scheduler
 import io.reactivex.functions.Action
 import org.reactivestreams.Publisher
 
-class HideAtStartShowAtError<Any>(private val whenStart: Action,
+class HideAtStartShowAtError<T>(private val whenStart: Action,
                                 private val atError: Action,
                                 private val errorPredicate: ErrorPredicate,
-                                private val targetScheduler: Scheduler) : FlowableTransformer<Any, Any> {
+                                private val targetScheduler: Scheduler) : FlowableTransformer<T, T> {
 
-    override fun apply(upstream: Flowable<Any>): Publisher<Any> {
+    override fun apply(upstream: Flowable<T>): Publisher<T> {
         return upstream
                 .doOnSubscribe{ hide() }
                 .doOnError({evaluateAndShowIfApplicable(it)})

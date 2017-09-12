@@ -12,11 +12,15 @@ import com.uziasferreira.randomuser.users.presentation.adapter.UsersAdapter
 import com.uziasferreira.randomuser.users.presentation.model.PresentationUser
 import com.uziasferreira.randomuser.users.presentation.presenter.UsersPresenter
 import dagger.android.AndroidInjection
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Action
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class UsersActivity : BaseActivity(), EmptyStateView {
+class UsersActivity : BaseActivity(), UsersView {
 
     @Inject
     lateinit var presenter: UsersPresenter
@@ -29,20 +33,15 @@ class UsersActivity : BaseActivity(), EmptyStateView {
         setContentView(R.layout.activity_main)
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun setupView() {
         recyclerview.adapter = userAdapter
         recyclerview.layoutManager = LinearLayoutManager(this)
-        userAdapter.setUsers(listOf(PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE"),
-                PresentationUser(name = "TESTE")))
+        recyclerview.adapter = userAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupView()
         presenter.getUsers()
     }
 
@@ -50,5 +49,18 @@ class UsersActivity : BaseActivity(), EmptyStateView {
 
     override fun injectDependencies() {
         AndroidInjection.inject(this)
+    }
+
+    override fun subscribeInto(flow: Flowable<List<PresentationUser>>): Disposable {
+        return flow.observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                        onError = {
+                            it.printStackTrace()
+                        },
+                        onNext = {
+                            userAdapter.setUsers(it)
+                        },
+                        onComplete = {}
+                )
     }
 }
