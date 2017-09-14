@@ -1,14 +1,13 @@
 package com.uziasferreira.randomuser.users.presentation.view
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast
 import com.uziasferreira.randomuser.R
 import com.uziasferreira.randomuser.core.presentation.BaseActivity
 import com.uziasferreira.randomuser.core.presentation.BasePresenter
-import com.uziasferreira.randomuser.core.presentation.EmptyStateView
+import com.uziasferreira.randomuser.core.presentation.ToogleRefreshView
 import com.uziasferreira.randomuser.users.presentation.adapter.UserAdapterImpl
-import com.uziasferreira.randomuser.users.presentation.adapter.UsersAdapter
 import com.uziasferreira.randomuser.users.presentation.model.PresentationUser
 import com.uziasferreira.randomuser.users.presentation.presenter.UsersPresenter
 import dagger.android.AndroidInjection
@@ -20,7 +19,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class UsersActivity : BaseActivity(), UsersView {
+class UsersActivity : BaseActivity(), UsersView, SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var presenter: UsersPresenter
@@ -34,15 +33,15 @@ class UsersActivity : BaseActivity(), UsersView {
     }
 
     private fun setupView() {
-        recyclerview.adapter = userAdapter
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = userAdapter
+        swiperefreshlayout.setOnRefreshListener(this)
     }
 
     override fun onResume() {
         super.onResume()
         setupView()
-        presenter.getUsers()
+        onRefresh()
     }
 
     override fun getPresenter(): BasePresenter = presenter
@@ -52,6 +51,7 @@ class UsersActivity : BaseActivity(), UsersView {
     }
 
     override fun subscribeInto(flow: Flowable<List<PresentationUser>>): Disposable {
+        userAdapter.clear()
         return flow.observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onError = {
@@ -63,4 +63,14 @@ class UsersActivity : BaseActivity(), UsersView {
                         onComplete = {}
                 )
     }
+
+    override fun onRefresh() {
+        swiperefreshlayout.isRefreshing = false
+        presenter.getUsers()
+    }
+
+    override fun enableRefresh(): Action = Action { swiperefreshlayout.isEnabled = true }
+
+    override fun disableRefresh(): Action = Action { swiperefreshlayout.isEnabled = false }
+
 }

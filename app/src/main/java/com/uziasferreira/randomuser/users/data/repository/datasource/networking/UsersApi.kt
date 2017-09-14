@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface UsersApi {
 
-    @GET("?results=80")
+    @GET("?results=20")
     fun getUsers(): Flowable<JsonUserBody>
 
 }

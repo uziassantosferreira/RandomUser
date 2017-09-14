@@ -25,6 +25,7 @@ ext {
     logging_interceptor_version = '3.8.0'
     mockito_kotlin_version = '1.5.0'
     arch_lifecycle_version = '1.0.0-alpha9'
+    glide_version = '4.1.1'
 }
 
 android {
@@ -75,6 +76,8 @@ dependencies {
     implementation "android.arch.lifecycle:runtime:$arch_lifecycle_version"
     implementation "android.arch.lifecycle:extensions:$arch_lifecycle_version"
     kapt "android.arch.lifecycle:compiler:$arch_lifecycle_version"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
     testImplementation "junit:junit:$test_junit_version"
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin_version"
     kaptAndroidTest "com.android.support.test:runner:$test_runner_version"

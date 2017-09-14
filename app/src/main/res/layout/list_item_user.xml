@@ -9,10 +9,33 @@
         android:id="@+id/textviewName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAvatar"
+        app:layout_constraintTop_toTopOf="@+id/imageViewAvatar"
+        tools:text="Uzias Santos Ferreira" />
+
+    <ImageView
+        android:id="@+id/imageViewAvatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        tools:text="Uzias Santos Ferreira"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textviewEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        tools:text="uziasferreira@gmail.com"
+        app:layout_constraintEnd_toEndOf="@+id/textviewName"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/textviewName" />
 
 </android.support.constraint.ConstraintLayout>

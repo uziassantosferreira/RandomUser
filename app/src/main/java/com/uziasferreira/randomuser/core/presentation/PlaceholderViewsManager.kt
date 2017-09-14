@@ -4,7 +4,8 @@ import android.view.View
 
 class PlaceholderViewsManager(private val loadingViewStub: View,
                               private val emptyViewStub: View,
-                              private val errorViewStub: View) {
+                              private val errorViewStub: View,
+                              private val containerView: View) {
 
     fun showLoading() {
         hideAll()

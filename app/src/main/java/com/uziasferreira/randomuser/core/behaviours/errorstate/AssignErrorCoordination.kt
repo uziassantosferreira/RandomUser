@@ -10,7 +10,7 @@ import io.reactivex.FlowableTransformer
 import io.reactivex.Scheduler
 import org.reactivestreams.Publisher
 
-open class AssignErrorCoordination<T>(private val view: ErrorStateView, private val uiScheduler: Scheduler):
+class AssignErrorCoordination<T>(private val view: ErrorStateView, private val uiScheduler: Scheduler):
         FlowableTransformer<T, T> {
 
     override fun apply(upstream: Flowable<T>): Publisher<T> {
