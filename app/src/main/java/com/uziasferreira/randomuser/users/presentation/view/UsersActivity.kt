@@ -17,6 +17,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Action
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.state_view_error.*
 import javax.inject.Inject
 
 class UsersActivity : BaseActivity(), UsersView, SwipeRefreshLayout.OnRefreshListener {
@@ -36,6 +37,9 @@ class UsersActivity : BaseActivity(), UsersView, SwipeRefreshLayout.OnRefreshLis
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = userAdapter
         swiperefreshlayout.setOnRefreshListener(this)
+        buttonTryAgain.setOnClickListener {
+            onRefresh()
+        }
     }
 
     override fun onResume() {
