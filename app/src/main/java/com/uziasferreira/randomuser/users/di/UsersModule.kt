@@ -3,10 +3,7 @@ package com.uziasferreira.randomuser.users.di
 import android.arch.lifecycle.LifecycleOwner
 import com.uziasferreira.randomuser.core.application.di.IOScheduler
 import com.uziasferreira.randomuser.core.behaviours.BehavioursCoordinator
-import com.uziasferreira.randomuser.core.presentation.EmptyStateView
-import com.uziasferreira.randomuser.core.presentation.ErrorStateView
-import com.uziasferreira.randomuser.core.presentation.LoadingView
-import com.uziasferreira.randomuser.core.presentation.PlaceholderViewsManager
+import com.uziasferreira.randomuser.core.presentation.*
 import com.uziasferreira.randomuser.core.presentation.lifecycles.LifecycleStrategist
 import com.uziasferreira.randomuser.core.presentation.lifecycles.di.LifecycleStrategistModule
 import com.uziasferreira.randomuser.users.data.repository.UsersRepositoryImpl
@@ -25,6 +22,7 @@ import com.uziasferreira.randomuser.users.presentation.view.UsersView
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.state_view_empty.*
 import kotlinx.android.synthetic.main.state_view_error.*
 import kotlinx.android.synthetic.main.state_view_loading.*
@@ -51,32 +49,38 @@ class UsersModule {
     @Provides fun providesUsersApi(retrofit: Retrofit)
             : UsersApi = retrofit.create(UsersApi::class.java)
 
-    @Provides fun emptyStateView(activity: UsersActivity): EmptyStateView {
+    @Provides fun providesEmptyStateView(activity: UsersActivity): EmptyStateView {
         return activity
     }
 
-    @Provides fun loadingView(activity: UsersActivity): LoadingView {
+    @Provides fun providesLoadingView(activity: UsersActivity): LoadingView {
         return activity
     }
 
-    @Provides fun errorView(activity: UsersActivity): ErrorStateView {
+    @Provides fun providesErrorView(activity: UsersActivity): ErrorStateView {
         return activity
     }
 
-    @Provides fun strategist(activity: UsersActivity): LifecycleOwner {
+    @Provides fun providesStrategist(activity: UsersActivity): LifecycleOwner {
         return activity
     }
 
-    @Provides fun userAdapter(activity: UsersActivity): UserAdapterImpl {
+    @Provides fun providesUserAdapter(): UserAdapterImpl {
         return UserAdapterImpl()
     }
 
-    @Provides fun usersView(activity: UsersActivity): UsersView {
+    @Provides fun providesUsersView(activity: UsersActivity): UsersView {
         return activity
     }
 
-    @Provides fun placeHolder(activity: UsersActivity): PlaceholderViewsManager {
+    @Provides fun providesToogleRefreshView(activity: UsersActivity): ToogleRefreshView {
+        return activity
+    }
+
+    @Provides fun providesPlaceHolder(activity: UsersActivity): PlaceholderViewsManager {
         return PlaceholderViewsManager(loadingViewStub = activity.state_view_loading,
-                errorViewStub = activity.state_view_error, emptyViewStub = activity.state_view_empty)
+                errorViewStub = activity.state_view_error,
+                emptyViewStub = activity.state_view_empty,
+                containerView = activity.swiperefreshlayout)
     }
 }

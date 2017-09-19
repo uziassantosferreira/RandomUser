@@ -9,6 +9,8 @@ object JsonUserMapper : BaseMapper<JsonUser, User>() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun transformTo(source: JsonUser): User = User(name =  source.name.fullName())
+    override fun transformTo(source: JsonUser): User = User(fullName = source.name.fullName(),
+            pictureUrl = source.picture.large,
+            email = source.email)
 
 }

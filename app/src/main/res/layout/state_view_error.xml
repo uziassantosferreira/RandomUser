@@ -7,17 +7,15 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_error"
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toTopOf="@+id/text_empty"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:src="@mipmap/ic_launcher" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_empty"
@@ -30,18 +28,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="ERROR "
+        android:text="@string/label_generic_error"
         tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="245dp"
-        tools:text="@string/app_name" />
+        tools:layout_editor_absoluteY="245dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonTryAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        tools:text="@string/app_name"
-        android:text="TRY AGAIN"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:text="@string/label_try_again"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

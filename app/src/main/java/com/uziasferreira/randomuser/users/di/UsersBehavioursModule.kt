@@ -5,9 +5,11 @@ import com.uziasferreira.randomuser.core.behaviours.BehavioursCoordinator
 import com.uziasferreira.randomuser.core.behaviours.emptystate.AssignEmptyCoordination
 import com.uziasferreira.randomuser.core.behaviours.errorstate.AssignErrorCoordination
 import com.uziasferreira.randomuser.core.behaviours.loadingstate.LoadingCoordination
+import com.uziasferreira.randomuser.core.behaviours.refreshtooglestate.RefreshToogleCoordination
 import com.uziasferreira.randomuser.core.presentation.EmptyStateView
 import com.uziasferreira.randomuser.core.presentation.ErrorStateView
 import com.uziasferreira.randomuser.core.presentation.LoadingView
+import com.uziasferreira.randomuser.core.presentation.ToogleRefreshView
 import com.uziasferreira.randomuser.users.domain.model.User
 import dagger.Module
 import dagger.Provides
@@ -19,8 +21,11 @@ class UsersBehavioursModule {
     @Provides
     fun providesBehavioursCoordinator(assignEmptyState: AssignEmptyCoordination<List<User>>,
                                       loadingCoordination: LoadingCoordination<List<User>>,
-                                      errorCoordination: AssignErrorCoordination<List<User>>): BehavioursCoordinator<List<User>> {
-        return BehavioursCoordinator(assignEmptyState, loadingCoordination, errorCoordination)
+                                      errorCoordination: AssignErrorCoordination<List<User>>,
+                                      refreshToogleCoordination: RefreshToogleCoordination<List<User>>)
+            : BehavioursCoordinator<List<User>> {
+        return BehavioursCoordinator(assignEmptyState, loadingCoordination, errorCoordination,
+                refreshToogleCoordination)
     }
 
     @Provides
@@ -37,4 +42,10 @@ class UsersBehavioursModule {
     fun providesAssignErrorCoordination(view: ErrorStateView, @UIScheduler scheduler: Scheduler): AssignErrorCoordination<List<User>> {
         return AssignErrorCoordination(view, scheduler)
     }
+
+    @Provides
+    fun providesRefreshToogleCoordination(view: ToogleRefreshView, @UIScheduler scheduler: Scheduler): RefreshToogleCoordination<List<User>> {
+        return RefreshToogleCoordination(view, scheduler)
+    }
+
 }

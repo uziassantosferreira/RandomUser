@@ -49,14 +49,8 @@ abstract class BaseActivity : AppCompatActivity(), BaseView, LifecycleRegistryOw
 
     override fun hideErrorState(): Action = Action { placeHolder.hideError() }
 
-    override fun disableRefresh(): Action {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun enableRefresh(): Action {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+    override fun enableRefresh(): Action = Action {}
+    override fun disableRefresh(): Action = Action {}
 
     override fun networkingErrorState(): Action {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

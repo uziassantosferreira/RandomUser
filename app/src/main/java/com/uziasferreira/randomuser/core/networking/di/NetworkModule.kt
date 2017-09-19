@@ -1,5 +1,6 @@
 package com.uziasferreira.randomuser.core.networking.di
 
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -9,6 +10,9 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
+import com.google.gson.GsonBuilder
+
+
 
 @Module
 class NetworkModule {
@@ -28,8 +32,13 @@ class NetworkModule {
             = RxJava2CallAdapterFactory.create()
 
     @Provides
-    fun providesGsonConverterFactory(): GsonConverterFactory
-            = GsonConverterFactory.create()
+    fun providesGsonConverterFactory(gson: Gson): GsonConverterFactory
+            = GsonConverterFactory.create(gson)
+
+    @Provides
+    fun providesGson(): Gson = GsonBuilder()
+            .setDateFormat("dd-mm-yyyy hh:mm:ss")
+            .create()
 
     @Provides
     fun providesOkHttpClient(logger: Interceptor): OkHttpClient = OkHttpClient.Builder()
