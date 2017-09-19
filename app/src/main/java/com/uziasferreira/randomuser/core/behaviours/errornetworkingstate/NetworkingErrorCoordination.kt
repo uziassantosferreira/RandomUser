@@ -17,7 +17,7 @@ class NetworkingErrorCoordination<T>(private val view: NetworkingView, private v
     private fun handleIfNetworkingError(throwable: Throwable): Publisher<T> {
         if (throwable is NetworkingError) {
             Completable.fromAction(view.networkingErrorState())
-                    .observeOn(uiScheduler)
+                    .subscribeOn(uiScheduler)
                     .subscribe()
         }
 

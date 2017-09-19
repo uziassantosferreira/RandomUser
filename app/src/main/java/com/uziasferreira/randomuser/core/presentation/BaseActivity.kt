@@ -5,6 +5,8 @@ import android.arch.lifecycle.LifecycleRegistryOwner
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.Toast
+import com.uziasferreira.randomuser.R
 import io.reactivex.functions.Action
 import javax.inject.Inject
 
@@ -52,8 +54,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView, LifecycleRegistryOw
     override fun enableRefresh(): Action = Action {}
     override fun disableRefresh(): Action = Action {}
 
-    override fun networkingErrorState(): Action {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun networkingErrorState(): Action = Action {
+        placeHolder.showError() }
 
 }

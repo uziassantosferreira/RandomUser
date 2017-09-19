@@ -3,13 +3,11 @@ package com.uziasferreira.randomuser.users.di
 import com.uziasferreira.randomuser.core.application.di.UIScheduler
 import com.uziasferreira.randomuser.core.behaviours.BehavioursCoordinator
 import com.uziasferreira.randomuser.core.behaviours.emptystate.AssignEmptyCoordination
+import com.uziasferreira.randomuser.core.behaviours.errornetworkingstate.NetworkingErrorCoordination
 import com.uziasferreira.randomuser.core.behaviours.errorstate.AssignErrorCoordination
 import com.uziasferreira.randomuser.core.behaviours.loadingstate.LoadingCoordination
 import com.uziasferreira.randomuser.core.behaviours.refreshtooglestate.RefreshToogleCoordination
-import com.uziasferreira.randomuser.core.presentation.EmptyStateView
-import com.uziasferreira.randomuser.core.presentation.ErrorStateView
-import com.uziasferreira.randomuser.core.presentation.LoadingView
-import com.uziasferreira.randomuser.core.presentation.ToogleRefreshView
+import com.uziasferreira.randomuser.core.presentation.*
 import com.uziasferreira.randomuser.users.domain.model.User
 import dagger.Module
 import dagger.Provides
@@ -22,10 +20,11 @@ class UsersBehavioursModule {
     fun providesBehavioursCoordinator(assignEmptyState: AssignEmptyCoordination<List<User>>,
                                       loadingCoordination: LoadingCoordination<List<User>>,
                                       errorCoordination: AssignErrorCoordination<List<User>>,
-                                      refreshToogleCoordination: RefreshToogleCoordination<List<User>>)
+                                      refreshToogleCoordination: RefreshToogleCoordination<List<User>>,
+                                      networkingErrorCoordination: NetworkingErrorCoordination<List<User>>)
             : BehavioursCoordinator<List<User>> {
         return BehavioursCoordinator(assignEmptyState, loadingCoordination, errorCoordination,
-                refreshToogleCoordination)
+                networkingErrorCoordination, refreshToogleCoordination)
     }
 
     @Provides
@@ -46,6 +45,11 @@ class UsersBehavioursModule {
     @Provides
     fun providesRefreshToogleCoordination(view: ToogleRefreshView, @UIScheduler scheduler: Scheduler): RefreshToogleCoordination<List<User>> {
         return RefreshToogleCoordination(view, scheduler)
+    }
+
+    @Provides
+    fun providesNetworkingErrorCoordination(view: NetworkingView, @UIScheduler scheduler: Scheduler): NetworkingErrorCoordination<List<User>> {
+        return NetworkingErrorCoordination(view, scheduler)
     }
 
 }

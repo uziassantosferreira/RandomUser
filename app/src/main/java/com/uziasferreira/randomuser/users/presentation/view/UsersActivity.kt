@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import com.uziasferreira.randomuser.R
 import com.uziasferreira.randomuser.core.presentation.BaseActivity
 import com.uziasferreira.randomuser.core.presentation.BasePresenter
-import com.uziasferreira.randomuser.core.presentation.ToogleRefreshView
 import com.uziasferreira.randomuser.users.presentation.adapter.UserAdapterImpl
 import com.uziasferreira.randomuser.users.presentation.model.PresentationUser
 import com.uziasferreira.randomuser.users.presentation.presenter.UsersPresenter

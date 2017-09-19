@@ -77,6 +77,10 @@ class UsersModule {
         return activity
     }
 
+    @Provides fun providesNetworkingView(activity: UsersActivity): NetworkingView {
+        return activity
+    }
+
     @Provides fun providesPlaceHolder(activity: UsersActivity): PlaceholderViewsManager {
         return PlaceholderViewsManager(loadingViewStub = activity.state_view_loading,
                 errorViewStub = activity.state_view_error,
